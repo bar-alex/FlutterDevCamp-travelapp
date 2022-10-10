@@ -46,7 +46,7 @@ class _PlaceDetailsState extends State<PlaceDetails> {
                 // borderRadius: BorderRadius.circular(5),
                 // shape: BoxShape.circle,
               ),
-              child: ClipRRect(
+              child: ClipRRect( 
                 // borderRadius: BorderRadius.circular(5),
                 child: Image.network( 
                   widget.place.cityImage, 
@@ -67,17 +67,17 @@ class _PlaceDetailsState extends State<PlaceDetails> {
                   // color: Colors.red.shade400,
                   // colorBlendMode: BlendMode.overlay,
                   frameBuilder: (BuildContext context, Widget child, int? frame,
-                      bool wasSynchronouslyLoaded) {
-                    // if (wasSynchronouslyLoaded) {
-                    //   return child;
-                    // }
-                    return AnimatedOpacity(
-                      opacity: frame == null ? 0 : 1,
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.easeOut,
-                      child: child,
-                    );
-                  },
+                    bool wasSynchronouslyLoaded) {
+                      if (wasSynchronouslyLoaded) {
+                        return child;
+                      }
+                      return AnimatedOpacity(
+                        opacity: frame == null ? 0 : 1,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeOut,
+                        child: child,
+                      );
+                    },
               
                 ),
               ),
@@ -102,13 +102,13 @@ class _PlaceDetailsState extends State<PlaceDetails> {
             const SizedBox(height: 15),
 
             SizedBox(
-              height: 80,
+              // height: 100,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    // for (int i=0; i<widget.place.attractions.length; i++)
+
                     for ( Attraction attraction in widget.place.attractions )
                       InkWell(
                         onTap:() => Navigator.push(
@@ -117,33 +117,36 @@ class _PlaceDetailsState extends State<PlaceDetails> {
                             builder: (BuildContext context) => AttractionDetails( attraction: attraction ) 
                           ),
                         ),
-                        child: Column(
-                          children: [
-                            PhysicalModel(
-                              color: Colors.red.shade800,
-                              shape: BoxShape.circle,
-                              elevation: 10.0,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(50),
-                                child: Image.network(attraction.attractionImage,
-                                  height: 60,
-                                  width: 60,
-                                  fit: BoxFit.cover,
-                                )
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                              child: Text( attraction.attractionName, 
-                                style: const TextStyle(
-                                  fontSize: 16, 
-                                  fontWeight: FontWeight.w400, 
-                                  color: Colors.white,
-                                  shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Column(
+                            children: [
+
+                              PhysicalModel(
+                                color: Colors.red.shade800,
+                                shape: BoxShape.circle,
+                                elevation: 10.0,
+                                child: CircleAvatar(
+                                  backgroundImage: NetworkImage(attraction.attractionImage,scale: 0.5),
+                                  radius: 40.0,
                                 ),
                               ),
-                            )
-                          ],
+
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                                child: Text( attraction.attractionName, 
+                                  softWrap: true,
+                                  style: const TextStyle(
+                                    fontSize: 16, 
+                                    fontWeight: FontWeight.w400, 
+                                    color: Colors.white,
+                                    shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
+                                  ),
+                                ),
+                              )
+
+                            ],
+                          ),
                         ),
                       ),
                   ],

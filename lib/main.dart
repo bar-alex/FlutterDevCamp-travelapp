@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutterdevcamp_travelapp/models/data.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
         // This is the theme of your application.
         primarySwatch: Colors.teal,
       ),
-      home: const Home(title: 'Travel App 🗺'),
+      home: Home(title: 'Travel App 🗺'),
     );
   }
 }
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
 
 
 class Home extends StatelessWidget {
-  const Home({super.key, required this.title});
+  Home({super.key, required this.title});
 
   final String title;
 
@@ -42,7 +44,7 @@ class Home extends StatelessWidget {
             title,
             style: GoogleFonts.lobster(
               fontSize: 28,
-              shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
+              shadows: [ const Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
             ),
           )),
       body: SingleChildScrollView(
@@ -68,15 +70,14 @@ class Home extends StatelessWidget {
                     // Attraction
                     Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: Container(
-                        // height: 50,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.red.shade800,
-                        ),
-                        child: const Center(
-                          child: Text( "Attraction",
+                      child: PhysicalModel(
+                        color: Colors.red.shade800,
+                        borderRadius: BorderRadius.circular(8),
+                        elevation: 10.0,
+                        child: Container(
+                          width: 100,
+                          alignment: Alignment.center,
+                          child: const Text( "Attraction",
                               style: TextStyle(
                                 fontSize: 17,
                                 color: Colors.white,
@@ -88,15 +89,14 @@ class Home extends StatelessWidget {
                     // Places
                     Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: Container(
-                        // height: 50,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.red.shade800,
-                        ),
-                        child: const Center(
-                          child: Text( "Places",
+                      child: PhysicalModel(
+                        color: Colors.red.shade800,
+                        borderRadius: BorderRadius.circular(8),
+                        elevation: 10.0,
+                        child: Container(
+                          width: 100,
+                          alignment: Alignment.center,
+                          child: const Text( "Places",
                               style: TextStyle(
                                 fontSize: 17,
                                 color: Colors.white,
@@ -108,15 +108,14 @@ class Home extends StatelessWidget {
                     // Hotels
                     Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: Container(
-                        // height: 50,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.red.shade800,
-                        ),
-                        child: const Center(
-                          child: Text( "Hotels",
+                      child: PhysicalModel(
+                        color: Colors.red.shade800,
+                        borderRadius: BorderRadius.circular(8),
+                        elevation: 10.0,
+                        child: Container(
+                          width: 100,
+                          alignment: Alignment.center,
+                          child: const Text( "Hotels",
                               style: TextStyle(
                                 fontSize: 17,
                                 color: Colors.white,
@@ -168,7 +167,7 @@ class Home extends StatelessWidget {
                   ),
                   child: Stack(
                     children: [
-                      // the image
+                      // the image in the grid
                       PhysicalModel(
                         color: Colors.red.shade800,
                         elevation: 8.0,
@@ -181,7 +180,7 @@ class Home extends StatelessWidget {
                             height: 200,
                             // color: Colors.orange.shade200,
                             // colorBlendMode: BlendMode.saturation,
-                                            
+
                             // color: Colors.purple.shade200,
                             // color: Colors.red.shade200,
                             // color: Colors.orange.shade200,

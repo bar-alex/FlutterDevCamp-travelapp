@@ -48,6 +48,18 @@ class _AttractionDetailsState extends State<AttractionDetails> {
                   child: Image.network( 
                     widget.attraction.attractionImage , 
                     fit: BoxFit.cover, 
+                    frameBuilder: (BuildContext context, Widget child, int? frame,
+                      bool wasSynchronouslyLoaded) {
+                        if (wasSynchronouslyLoaded) {
+                          return child;
+                        }
+                        return AnimatedOpacity(
+                          opacity: frame == null ? 0 : 1,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeOut,
+                          child: child,
+                        );
+                      },
                     // height: 200,
                     // color: Colors.orange.shade200,
                     // colorBlendMode: BlendMode.saturation,
@@ -63,18 +75,6 @@ class _AttractionDetailsState extends State<AttractionDetails> {
                                     
                     // color: Colors.red.shade400,
                     // colorBlendMode: BlendMode.overlay,
-                    frameBuilder: (BuildContext context, Widget child, int? frame,
-                        bool wasSynchronouslyLoaded) {
-                      // if (wasSynchronouslyLoaded) {
-                      //   return child;
-                      // }
-                      return AnimatedOpacity(
-                        opacity: frame == null ? 0 : 1,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeOut,
-                        child: child,
-                      );
-                    },
                 
                   ),
                 ),

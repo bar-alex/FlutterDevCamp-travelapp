@@ -38,47 +38,44 @@ class _PlaceDetailsState extends State<PlaceDetails> {
           children: <Widget>[
 
             // the image
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                // color: Colors.purple,
-                border: Border.all(color: Colors.white),
-                // borderRadius: BorderRadius.circular(5),
-                // shape: BoxShape.circle,
-              ),
-              child: ClipRRect( 
-                // borderRadius: BorderRadius.circular(5),
-                child: Image.network( 
-                  widget.place.cityImage, 
-                  fit: BoxFit.cover, 
-                  // height: 200,
-                  // color: Colors.orange.shade200,
-                  // colorBlendMode: BlendMode.saturation,
-                                  
-                  // color: Colors.purple.shade200,
-                  // color: Colors.red.shade200,
-                  // color: Colors.orange.shade200,
-                  // colorBlendMode: BlendMode.hue,
-                                  
-                  // color: Colors.orange.shade400,
-                  // color: Colors.red.shade400,
-                  // colorBlendMode: BlendMode.saturation,
-                                  
-                  // color: Colors.red.shade400,
-                  // colorBlendMode: BlendMode.overlay,
-                  frameBuilder: (BuildContext context, Widget child, int? frame,
-                    bool wasSynchronouslyLoaded) {
-                      if (wasSynchronouslyLoaded) {
-                        return child;
-                      }
-                      return AnimatedOpacity(
-                        opacity: frame == null ? 0 : 1,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeOut,
-                        child: child,
-                      );
-                    },
-              
+            Hero(
+              tag: 'cityHero-${widget.place.cityName}',
+              child: Material(
+                color: Colors.transparent,
+                child: ClipRRect( 
+                  // borderRadius: BorderRadius.circular(5),
+                  child: Image.network( 
+                    widget.place.cityImage, 
+                    fit: BoxFit.cover, 
+                    // height: 200,
+                    // color: Colors.orange.shade200,
+                    // colorBlendMode: BlendMode.saturation,
+                                    
+                    // color: Colors.purple.shade200,
+                    // color: Colors.red.shade200,
+                    // color: Colors.orange.shade200,
+                    // colorBlendMode: BlendMode.hue,
+                                    
+                    // color: Colors.orange.shade400,
+                    // color: Colors.red.shade400,
+                    // colorBlendMode: BlendMode.saturation,
+                                    
+                    // color: Colors.red.shade400,
+                    // colorBlendMode: BlendMode.overlay,
+                    frameBuilder: (BuildContext context, Widget child, int? frame,
+                      bool wasSynchronouslyLoaded) {
+                        if (wasSynchronouslyLoaded) {
+                          return child;
+                        }
+                        return AnimatedOpacity(
+                          opacity: frame == null ? 0 : 1,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeOut,
+                          child: child,
+                        );
+                      },
+                              
+                  ),
                 ),
               ),
             ),
@@ -110,42 +107,48 @@ class _PlaceDetailsState extends State<PlaceDetails> {
                   children: <Widget>[
 
                     for ( Attraction attraction in widget.place.attractions )
-                      InkWell(
-                        onTap:() => Navigator.push(
-                          context, 
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => AttractionDetails( attraction: attraction ) 
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Column(
-                            children: [
-
-                              PhysicalModel(
-                                color: Colors.red.shade800,
-                                shape: BoxShape.circle,
-                                elevation: 10.0,
-                                child: CircleAvatar(
-                                  backgroundImage: NetworkImage(attraction.attractionImage,scale: 0.5),
-                                  radius: 40.0,
-                                ),
+                      Hero(
+                        tag: attraction.attractionName,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap:() => Navigator.push(
+                              context, 
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => AttractionDetails( attraction: attraction ) 
                               ),
-
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                                child: Text( attraction.attractionName, 
-                                  softWrap: true,
-                                  style: const TextStyle(
-                                    fontSize: 16, 
-                                    fontWeight: FontWeight.w400, 
-                                    color: Colors.white,
-                                    shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Column(
+                                children: [
+                                              
+                                  PhysicalModel(
+                                    color: Colors.red.shade800,
+                                    shape: BoxShape.circle,
+                                    elevation: 10.0,
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(attraction.attractionImage,scale: 0.5),
+                                      radius: 40.0,
+                                    ),
                                   ),
-                                ),
-                              )
-
-                            ],
+                                              
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                                    child: Text( attraction.attractionName, 
+                                      softWrap: true,
+                                      style: const TextStyle(
+                                        fontSize: 16, 
+                                        fontWeight: FontWeight.w400, 
+                                        color: Colors.white,
+                                        shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
+                                      ),
+                                    ),
+                                  )
+                                              
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ),

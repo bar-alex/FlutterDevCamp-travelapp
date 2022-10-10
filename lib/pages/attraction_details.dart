@@ -35,47 +35,44 @@ class _AttractionDetailsState extends State<AttractionDetails> {
           children: [
       
               // the image
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  // color: Colors.purple,
-                  border: Border.all(color: Colors.white),
-                  // borderRadius: BorderRadius.circular(5),
-                  // shape: BoxShape.circle,
-                ),
-                child: ClipRRect(
-                  // borderRadius: BorderRadius.circular(5),
-                  child: Image.network( 
-                    widget.attraction.attractionImage , 
-                    fit: BoxFit.cover, 
-                    frameBuilder: (BuildContext context, Widget child, int? frame,
-                      bool wasSynchronouslyLoaded) {
-                        if (wasSynchronouslyLoaded) {
-                          return child;
-                        }
-                        return AnimatedOpacity(
-                          opacity: frame == null ? 0 : 1,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeOut,
-                          child: child,
-                        );
-                      },
-                    // height: 200,
-                    // color: Colors.orange.shade200,
-                    // colorBlendMode: BlendMode.saturation,
-                                    
-                    // color: Colors.purple.shade200,
-                    // color: Colors.red.shade200,
-                    // color: Colors.orange.shade200,
-                    // colorBlendMode: BlendMode.hue,
-                                    
-                    // color: Colors.orange.shade400,
-                    // color: Colors.red.shade400,
-                    // colorBlendMode: BlendMode.saturation,
-                                    
-                    // color: Colors.red.shade400,
-                    // colorBlendMode: BlendMode.overlay,
-                
+              Hero(
+                tag: widget.attraction.attractionName,
+                child: Material(
+                  color: Colors.transparent,
+                  child: ClipRRect(
+                    // borderRadius: BorderRadius.circular(5),
+                    child: Image.network( 
+                      widget.attraction.attractionImage , 
+                      fit: BoxFit.cover, 
+                      frameBuilder: (BuildContext context, Widget child, int? frame,
+                        bool wasSynchronouslyLoaded) {
+                          if (wasSynchronouslyLoaded) {
+                            return child;
+                          }
+                          return AnimatedOpacity(
+                            opacity: frame == null ? 0 : 1,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeOut,
+                            child: child,
+                          );
+                        },
+                      // height: 200,
+                      // color: Colors.orange.shade200,
+                      // colorBlendMode: BlendMode.saturation,
+                                      
+                      // color: Colors.purple.shade200,
+                      // color: Colors.red.shade200,
+                      // color: Colors.orange.shade200,
+                      // colorBlendMode: BlendMode.hue,
+                                      
+                      // color: Colors.orange.shade400,
+                      // color: Colors.red.shade400,
+                      // colorBlendMode: BlendMode.saturation,
+                                      
+                      // color: Colors.red.shade400,
+                      // colorBlendMode: BlendMode.overlay,
+                  
+                    ),
                   ),
                 ),
               ),

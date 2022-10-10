@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutterdevcamp_travelapp/models/data.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,7 +27,7 @@ class MyApp extends StatelessWidget {
 
 
 class Home extends StatelessWidget {
-  Home({super.key, required this.title});
+  const Home({super.key, required this.title});
 
   final String title;
 
@@ -172,27 +170,33 @@ class Home extends StatelessWidget {
                         color: Colors.red.shade800,
                         elevation: 8.0,
                         borderRadius: BorderRadius.circular(5),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image.network( 
-                            dataList[index].cityImage, 
-                            fit: BoxFit.cover, 
-                            height: 200,
-                            // color: Colors.orange.shade200,
-                            // colorBlendMode: BlendMode.saturation,
-
-                            // color: Colors.purple.shade200,
-                            // color: Colors.red.shade200,
-                            // color: Colors.orange.shade200,
-                            // colorBlendMode: BlendMode.hue,
-                                            
-                            // color: Colors.orange.shade400,
-                            // color: Colors.red.shade400,
-                            // colorBlendMode: BlendMode.saturation,
-                                            
-                            // color: Colors.red.shade400,
-                            // colorBlendMode: BlendMode.overlay,
-                        
+                        child: Hero(
+                          tag: 'cityHero-${dataList[index].cityName}',
+                          child: Material(
+                            color: Colors.transparent,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image.network( 
+                                dataList[index].cityImage, 
+                                fit: BoxFit.cover, 
+                                height: 200,
+                                // color: Colors.orange.shade200,
+                                // colorBlendMode: BlendMode.saturation,
+                              
+                                // color: Colors.purple.shade200,
+                                // color: Colors.red.shade200,
+                                // color: Colors.orange.shade200,
+                                // colorBlendMode: BlendMode.hue,
+                                                
+                                // color: Colors.orange.shade400,
+                                // color: Colors.red.shade400,
+                                // colorBlendMode: BlendMode.saturation,
+                                                
+                                // color: Colors.red.shade400,
+                                // colorBlendMode: BlendMode.overlay,
+                                                    
+                              ),
+                            ),
                           ),
                         ),
                       ),

@@ -40,7 +40,10 @@ class Home extends StatelessWidget {
           centerTitle: true,
           title: Text(
             title,
-            style: GoogleFonts.lobster(fontSize: 28),
+            style: GoogleFonts.lobster(
+              fontSize: 28,
+              shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
+            ),
           )),
       body: SingleChildScrollView(
         child: Column(
@@ -56,7 +59,7 @@ class Home extends StatelessWidget {
             const SizedBox(height: 15),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: SizedBox(
                 height: 50,
                 child: Row(
@@ -77,6 +80,7 @@ class Home extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 17,
                                 color: Colors.white,
+                                shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
                               )),
                         ),
                       ),
@@ -96,6 +100,7 @@ class Home extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 17,
                                 color: Colors.white,
+                                shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
                               )),
                         ),
                       ),
@@ -115,6 +120,7 @@ class Home extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 17,
                                 color: Colors.white,
+                                shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
                               )),
                         ),
                       ),
@@ -133,6 +139,8 @@ class Home extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
+                  color: Colors.red,
+                  shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1, 1)), ],
                 )),
             ),
 
@@ -149,26 +157,22 @@ class Home extends StatelessWidget {
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
                 ),
+
               itemBuilder: (BuildContext context, index) {
                 return InkWell(
                   onTap: () => Navigator.push(
                     context, 
                     MaterialPageRoute(
-                      builder: (BuildContext context) => 
-                        PlaceDetails( place: dataList[index] ) 
+                      builder: (BuildContext context) => PlaceDetails( place: dataList[index] ) 
                     ),
                   ),
                   child: Stack(
                     children: [
                       // the image
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          // color: Colors.purple,
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(5),
-                          // shape: BoxShape.circle,
-                        ),
+                      PhysicalModel(
+                        color: Colors.red.shade800,
+                        elevation: 8.0,
+                        borderRadius: BorderRadius.circular(5),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: Image.network( 
@@ -183,24 +187,12 @@ class Home extends StatelessWidget {
                             // color: Colors.orange.shade200,
                             // colorBlendMode: BlendMode.hue,
                                             
-                            color: Colors.orange.shade400,
+                            // color: Colors.orange.shade400,
                             // color: Colors.red.shade400,
-                            colorBlendMode: BlendMode.saturation,
+                            // colorBlendMode: BlendMode.saturation,
                                             
                             // color: Colors.red.shade400,
                             // colorBlendMode: BlendMode.overlay,
-                            frameBuilder: (BuildContext context, Widget child, int? frame,
-                                bool wasSynchronouslyLoaded) {
-                              // if (wasSynchronouslyLoaded) {
-                              //   return child;
-                              // }
-                              return AnimatedOpacity(
-                                opacity: frame == null ? 0 : 1,
-                                duration: const Duration(seconds: 1),
-                                curve: Curves.easeOut,
-                                child: child,
-                              );
-                            },
                         
                           ),
                         ),
@@ -215,13 +207,16 @@ class Home extends StatelessWidget {
                             borderRadius: const BorderRadius.vertical(bottom: Radius.circular(5)),
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 3.0),
-                              color: Colors.white.withAlpha(160),
+                              // color: Colors.white.withAlpha(160),
+                              color: Colors.red.shade800.withAlpha(150),
                               child: Center(
                                 child: Text( dataList[index].cityName, 
-                                  style: TextStyle(
-                                      color: Colors.red.shade800, 
+                                  style: const TextStyle(
+                                      // color: Colors.red.shade800, 
+                                      color: Colors.white, 
                                       fontSize: 20,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
+                                      shadows: [ Shadow(blurRadius: 3.0, offset: Offset(1.5, 1.5)), ]
                                     ) 
                                   ),
                               ),
